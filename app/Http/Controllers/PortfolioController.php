@@ -30,13 +30,15 @@ class PortfolioController extends Controller
         $portfolio = Portfolio::create($formfill);
 
 
-        if ($request->hasFile('image')) {
-            $portfolio->addMediaFromRequest('image')
-                ->usingName('portfolioImage')
-                ->toMediaCollection('portfolioImage');
+        if ($images = $request->file('other_image')) {
+            foreach ($images as $image) {
+                $portfolio->addMedia($image)
+                    ->toMediaCollection('portfolio_other_image');
+            }
+
         }
-        return $portfolio;
-        ///return response(['message' => 'Portfolio created successfully'], 200);
+        //return $portfolio;
+        return response(['message' => 'Portfolio created successfully'], 200);
 
     }
 
