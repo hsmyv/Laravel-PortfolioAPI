@@ -31,16 +31,18 @@ Route::get('users',   [UserController::class, 'index']);
 Route::post('sendmail', [MailController::class, 'send']);
 Route::get('portfolios', [PortfolioController::class, 'index']);
 Route::get('portfolios/{id}', [PortfolioController::class, 'show']);
+Route::post('/login', [UserController::class, 'login']);
+
+
 
 Route::group(['middleware' => ['auth:sanctum', 'role:Super-Admin']], function () {
     Route::patch('admin/biography/{id}', [AdminController::class, 'update_biography']);
     Route::patch('admin/education/{id}', [AdminController::class, 'update_education']);
+    Route::post('/add-user', [UserController::class, 'add']);
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/create-portfolio', [PortfolioController::class, 'create']); //->middleware('permission:Create-Portfolio');
-    Route::post('/login', [UserController::class, 'login']);
-    Route::post('/add-user', [UserController::class, 'add']);
     Route::patch('/update-portfolio/', [PortfolioController::class, 'update']); //->middleware('permission:Update-Portfolio');
     Route::delete('/delete-portfolio/{id}', [PortfolioController::class, 'destroy']); //->middleware('permission:Delete-Portfolio');
 

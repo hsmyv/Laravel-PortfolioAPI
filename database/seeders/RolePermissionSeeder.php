@@ -17,11 +17,13 @@ class RolePermissionSeeder extends Seeder
      */
     public function run()
     {
+        /*
          Role::create(['name' => 'Super-Admin']);
          Role::create(['name' => 'Admin']);
          Role::create(['name' => 'Standart-User']);
-
+        */
         //Give role to model
+
         /*
         $user = User::where('id', 1)->first();
         $user->syncRoles('Super-Admin');
